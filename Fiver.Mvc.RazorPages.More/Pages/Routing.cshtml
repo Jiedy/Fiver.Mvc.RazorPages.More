@@ -1,4 +1,4 @@
-﻿@page "{handler?}"
+﻿@page
 @model RoutingModel
 
 <p><strong>Message: </strong> @Model.Message</p>
@@ -29,25 +29,23 @@
 
 @* Url.Page *@
 <a asp-page="/Routing" asp-page-handler="UrlForPage">OnGetUrlForPage</a>
-(Message will show result of: Url.Page("Routing"))
+(Url.Page("Routing"))
 <hr />
 
 <a asp-page="/Routing" asp-page-handler="UrlForPageAndHandler">OnGetUrlForPageAndHandler</a>
-(Message will show result of: Url.Page("Routing", "One")) -- doesn't validate the Handler!
+(Url.Page("Routing", "One"))
 <hr />
 
 @* Parameters *@
 <a asp-page="/Routing" asp-page-handler="WithParam" asp-route-id="5">OnGetWithParam</a><hr />
 
 <form method="post" asp-page-handler="WithParam" asp-route-id="5">
-    <button type="submit">OnPostWithParam</button>
+    <button type="submit">OnPostWithParam (using asp-route-*)</button>
 </form>
-(using asp-route-*)
 <hr />
 
 <form method="post" asp-page-handler="WithParam">
     <input type="hidden" name="id" value="12" />
-    <button type="submit">OnPostWithParam</button>
+    <button type="submit">OnPostWithParam (using form inputs)</button>
 </form>
-(using form inputs)
 <hr />

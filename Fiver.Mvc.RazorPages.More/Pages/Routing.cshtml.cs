@@ -55,6 +55,10 @@ namespace Fiver.Mvc.RazorPages.More.Pages
         public void OnPostWithParam(int id)
             => this.Message = $"Pages/Routing/OnPostWithParam: {id}";
 
+        // can't overload - throws exception
+        //public void OnPostWithParam(int id, string age)
+        //    => this.Message = $"Pages/Routing/OnPostWithParam: {id}/{age}";
+
         #endregion
     }
 }
