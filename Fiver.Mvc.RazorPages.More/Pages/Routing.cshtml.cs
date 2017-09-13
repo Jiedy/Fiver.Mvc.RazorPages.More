@@ -60,5 +60,18 @@ namespace Fiver.Mvc.RazorPages.More.Pages
         //    => this.Message = $"Pages/Routing/OnPostWithParam: {id}/{age}";
 
         #endregion
+
+        #region " Redirects "
+
+        public IActionResult OnGetGotoPage()
+        {
+            this.Message = "Pages/Routing/OnGetGotoPage";
+            return Page();
+        }
+
+        public IActionResult OnGetRedirectToPage() // return type can't be void
+                => RedirectToPage("Routing2", "FromRouting1", new { id = 5, name = "Tahir" });
+
+        #endregion 
     }
 }
