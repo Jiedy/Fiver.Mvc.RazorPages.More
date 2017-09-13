@@ -23,6 +23,7 @@ namespace Fiver.Mvc.RazorPages.More
             IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
+            app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
     }

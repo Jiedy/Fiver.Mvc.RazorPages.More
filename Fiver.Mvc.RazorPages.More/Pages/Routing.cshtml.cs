@@ -5,98 +5,56 @@ namespace Fiver.Mvc.RazorPages.More.Pages
 {
     public class RoutingModel : PageModel
     {
-        public string Route { get; set; }
         public string Message { get; set; }
-        
-        public IActionResult OnGet()
-        {
-            this.Route = "Pages/Routing/OnGet";
-            return Page();
-        }
 
-        public IActionResult OnGetOne()
-        {
-            this.Route = "Pages/Routing/OnGetOne";
-            return Page();
-        }
-        
-        [HttpPost] // -> doesn't work
-        public IActionResult OnGetTwo()
-        {
-            this.Route = "Pages/Routing/OnGetTwo";
-            this.Message = "Via GET even with [HttpPost] constraint";
-            return Page();
-        }
+        #region " GET / POST "
 
-        public IActionResult OnPost()
-        {
-            this.Route = "Pages/Routing/OnPost";
-            return Page();
-        }
+        public void OnGet() => this.Message = "Pages/Routing/OnGet";
+        public void OnGetOne() => this.Message = "Pages/Routing/OnGetOne";
 
-        public IActionResult OnPostOne()
-        {
-            this.Route = "Pages/Routing/OnPostOne";
-            return Page();
-        }
+        public void OnPost() => this.Message = "Pages/Routing/OnPost";
+        public void OnPostOne() => this.Message = "Pages/Routing/OnPostOne";
 
-        [HttpGet] // -> doesn't work
-        public IActionResult OnPostTwo()
-        {
-            this.Route = "Pages/Routing/OnPostTwo";
-            this.Message = "Via POST even with [HttpGet] constraint";
-            return Page();
-        }
+        #endregion
 
-        //[HttpDelete] // -> doesn't work
-        public IActionResult OnDelete() // not called
-        {
-            this.Route = "Pages/Routing/OnDelete";
-            return Page();
-        }
+        #region " Action Constraints "
 
-        //[HttpPut] // -> doesn't work
-        public IActionResult OnPut()
-        {
-            this.Route = "Pages/Routing/OnPut";
-            return Page();
-        }
+        [HttpPost] // -> ignored
+        public void OnGetTwo() => this.Message = "Pages/Routing/OnGetTwo";
 
-        [Route("routetoone")] // -> doesn't work
-        public IActionResult OnGetRoute1()
-        {
-            this.Route = "Pages/Routing/OnGetRoute1";
-            return Page();
-        }
+        [HttpGet] // -> ignored
+        public void OnPostTwo() => this.Message = "Pages/Routing/OnPostTwo";
 
-        public IActionResult OnGetUrlForPage()
-        {
-            this.Route = "Pages/Routing/OnGetUrlForPage";
-            this.Message = $"{Url.Page("Routing","")}";
-            return Page();
-        }
+        #endregion
 
-        public IActionResult OnGetUrlForPageAndHandler()
-        {
-            // doesn't validate the handler 
-            // i.e. you can supply handler that doesn't exist
-            this.Route = "Pages/Routing/OnGetUrlForPageAndHandler";
-            this.Message = $"{Url.Page("Routing", "One")}"; 
-            return Page();
-        }
+        #region " Attribute Routing "
 
-        public IActionResult OnGetWithParam(int id)
-        {
-            this.Route = "Pages/Routing/OnGetWithParam";
-            this.Message = $"Parameter: {id}";
-            return Page();
-        }
+        [Route("routetoone")] // -> ignored
+        public void OnGetRoute1() => this.Message = "Pages/Routing/OnGetRoute1";
 
-        public IActionResult OnPostWithParam(int id)
-        {
-            this.Route = "Pages/Routing/OnPostWithParam";
-            this.Message = $"Parameter: {id}";
-            return Page();
-        }
+        #endregion
+
+        #region " Url.Page "
+
+        public void OnGetUrlForPage()
+            => this.Message = $"Pages/Routing/OnGetUrlForPage: {Url.Page("Routing", "")}";
+
+        // doesn't validate the handler 
+        // i.e. you can supply handler that doesn't exist
+        public void OnGetUrlForPageAndHandler()
+            => this.Message = $"Pages/Routing/OnGetUrlForPageAndHandler: " +
+                            $"{Url.Page("Routing", "One")}";
+
+        #endregion
+
+        #region " Parameters "
+
+        public void OnGetWithParam(int id)
+            => this.Message = $"Pages/Routing/OnGetWithParam: {id}";
+
+        public void OnPostWithParam(int id)
+            => this.Message = $"Pages/Routing/OnPostWithParam: {id}";
+
+        #endregion
     }
 }

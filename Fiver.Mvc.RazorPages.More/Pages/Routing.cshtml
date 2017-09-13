@@ -1,53 +1,33 @@
 ﻿@page "{handler?}"
 @model RoutingModel
 
-<p><strong>Route: </strong> @Model.Route</p> 
 <p><strong>Message: </strong> @Model.Message</p>
 <hr />
 
-@* Get *@
+@* Get / Post *@
 <a asp-page="/Routing">OnGet</a> <hr />
 <a asp-page="/Routing" asp-page-handler="One">OnGetOne</a><hr />
-<a asp-page="/Routing" asp-page-handler="Two">OnGetTwo [HttpPost]</a><hr />
-
-@* Post *@
 <form method="post" asp-page-handler="">
     <button type="submit">OnPost</button>
 </form><hr />
 <form method="post" asp-page-handler="One">
     <button type="submit">OnPostOne</button>
 </form><hr />
+
+@* Action Constraints *@
+<form method="get">
+    <button type="submit" asp-page-handler="Two">OnGetTwo [HttpPost]</button>
+</form><hr />
 <form method="post" asp-page-handler="Two">
-    <button type="submit">OnPostTwo</button>
-</form><hr />
-
-@* Delete *@
-<a asp-page="/Routing" asp-page-handler="Delete">OnDelete</a>
-(This will call OnGET -- OnDelete doesn't seem to work) <hr />
-
-<form method="delete">
-    <button type="submit">OnDelete</button>
-    (This will call OnGET -- OnDelete doesn't seem to work)
-</form><hr />
-
-@* Put *@
-<a asp-page="/Routing" asp-page-handler="Put">OnPut</a>
-(This will call OnGET -- OnPut doesn't seem to work) <hr />
-
-<form method="put">
-    <button type="submit">OnPut</button>
-    (This will call OnGET -- OnPut doesn't seem to work)
+    <button type="submit">OnPostTwo [HttpGet]</button>
 </form><hr />
 
 @* Attribute Routing *@
-@* This throws ex: asp-page and asp-route mutually exclusive *@ 
+@* This throws ex: asp-page and asp-route mutually exclusive *@
 @* <a asp-page="/Routing" asp-route="routetoone">OnGetRoute1</a><hr />*@
+<a asp-route="routetoone">OnGetRoute1</a><hr />
 
-<a asp-route="routetoone">OnGetRoute1</a>
-(This will call OnGET -- Attribute Routing doesn't seem to work)
-<hr />
-
-@* Url.Path *@
+@* Url.Page *@
 <a asp-page="/Routing" asp-page-handler="UrlForPage">OnGetUrlForPage</a>
 (Message will show result of: Url.Page("Routing"))
 <hr />
