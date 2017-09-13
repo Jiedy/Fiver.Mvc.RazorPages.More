@@ -1,0 +1,59 @@
+﻿@page
+@model ModelBindingModel
+
+<p><strong>Message: </strong> @Model.Message</p>
+<hr />
+
+<a asp-page="/ModelBinding" asp-page-handler="FromQuery" asp-route-id="5">OnGetFromQuery</a><hr />
+
+<a asp-page="/ModelBinding" asp-page-handler="FromForm" asp-route-id="5">OnGetFromForm</a>
+(GET doesn't work i.e. doesn't bind to [FromForm])
+<hr />
+
+<form method="get" asp-page-handler="FromForm"> @* GET doesn't work *@
+    <input type="text" name="id" />
+    <button type="submit">OnGetFromForm</button>
+</form> (GET doesn't work i.e. doesn't bind to [FromForm])
+<hr />
+
+<form method="post" asp-page-handler="FromForm">
+    <input type="text" name="id" />
+    <button type="submit">OnPostFromForm</button>
+</form>
+<hr />
+
+<a asp-page="/ModelBinding" asp-page-handler="FromBody" asp-route-id="5">OnGetFromBody</a>
+(GET doesn't work i.e. doesn't bind to [FromBody])
+<hr />
+
+<form method="get" asp-page-handler="FromBody">
+    @* GET doesn't work *@
+    <input type="text" name="id" />
+    <button type="submit">OnGetFromBody</button>
+</form> (GET doesn't work i.e. doesn't bind to [FromBody])
+<hr />
+
+<form method="post" asp-page-handler="FromBody">
+    @* GET doesn't work *@
+    <input type="text" name="id" />
+    <button type="submit">OnPostFromBody</button>
+</form> (POST doesn't work i.e. doesn't bind to [FromBody])
+<hr />
+
+<a asp-page="/ModelBinding" asp-page-handler="FromHeader">OnGetFromHeader</a><hr />
+
+<hr />
+
+<a asp-page="/ModelBinding" asp-page-handler="ComplexFromQuery" 
+   asp-route-id="5" asp-route-title="Dr. No">OnGetComplexFromQuery</a><hr />
+
+<form method="post" asp-page-handler="ComplexFromForm">
+    <input type="text" name="id" />
+    <input type="text" name="title" />
+    <button type="submit">OnPostComplexFromForm</button>
+</form>
+<hr />
+
+<a asp-page="/ModelBinding" asp-page-handler="ComplexFromHeader">OnGetComplexFromHeader</a><hr />
+
+
