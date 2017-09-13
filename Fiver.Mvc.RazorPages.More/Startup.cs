@@ -10,6 +10,12 @@ namespace Fiver.Mvc.RazorPages.More
             IServiceCollection services)
         {
             services.AddMvc();
+            //services.AddMvc()
+            //        .AddRazorPagesOptions(options =>
+            //        {
+            //            options.RootDirectory = "/Pages";
+            //            options.Conventions.AddPageRoute("/Routing", "NewRouting");
+            //        });
         }
 
         public void Configure(

@@ -1,0 +1,73 @@
+﻿@page "{handler?}"
+@model RoutingModel
+
+<p><strong>Route: </strong> @Model.Route</p> 
+<p><strong>Message: </strong> @Model.Message</p>
+<hr />
+
+@* Get *@
+<a asp-page="/Routing">OnGet</a> <hr />
+<a asp-page="/Routing" asp-page-handler="One">OnGetOne</a><hr />
+<a asp-page="/Routing" asp-page-handler="Two">OnGetTwo [HttpPost]</a><hr />
+
+@* Post *@
+<form method="post" asp-page-handler="">
+    <button type="submit">OnPost</button>
+</form><hr />
+<form method="post" asp-page-handler="One">
+    <button type="submit">OnPostOne</button>
+</form><hr />
+<form method="post" asp-page-handler="Two">
+    <button type="submit">OnPostTwo</button>
+</form><hr />
+
+@* Delete *@
+<a asp-page="/Routing" asp-page-handler="Delete">OnDelete</a>
+(This will call OnGET -- OnDelete doesn't seem to work) <hr />
+
+<form method="delete">
+    <button type="submit">OnDelete</button>
+    (This will call OnGET -- OnDelete doesn't seem to work)
+</form><hr />
+
+@* Put *@
+<a asp-page="/Routing" asp-page-handler="Put">OnPut</a>
+(This will call OnGET -- OnPut doesn't seem to work) <hr />
+
+<form method="put">
+    <button type="submit">OnPut</button>
+    (This will call OnGET -- OnPut doesn't seem to work)
+</form><hr />
+
+@* Attribute Routing *@
+@* This throws ex: asp-page and asp-route mutually exclusive *@ 
+@* <a asp-page="/Routing" asp-route="routetoone">OnGetRoute1</a><hr />*@
+
+<a asp-route="routetoone">OnGetRoute1</a>
+(This will call OnGET -- Attribute Routing doesn't seem to work)
+<hr />
+
+@* Url.Path *@
+<a asp-page="/Routing" asp-page-handler="UrlForPage">OnGetUrlForPage</a>
+(Message will show result of: Url.Page("Routing"))
+<hr />
+
+<a asp-page="/Routing" asp-page-handler="UrlForPageAndHandler">OnGetUrlForPageAndHandler</a>
+(Message will show result of: Url.Page("Routing", "One")) -- doesn't validate the Handler!
+<hr />
+
+@* Parameters *@
+<a asp-page="/Routing" asp-page-handler="WithParam" asp-route-id="5">OnGetWithParam</a><hr />
+
+<form method="post" asp-page-handler="WithParam" asp-route-id="5">
+    <button type="submit">OnPostWithParam</button>
+</form>
+(using asp-route-*)
+<hr />
+
+<form method="post" asp-page-handler="WithParam">
+    <input type="hidden" name="id" value="12" />
+    <button type="submit">OnPostWithParam</button>
+</form>
+(using form inputs)
+<hr />
