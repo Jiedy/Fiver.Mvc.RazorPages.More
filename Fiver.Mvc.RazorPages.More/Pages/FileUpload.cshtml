@@ -1,0 +1,23 @@
+﻿@page
+@model FileUploadModel
+
+<form asp-page-handler="UploadFile" method="post"
+      enctype="multipart/form-data">
+
+    <input type="file" name="file" />
+    <button type="submit">Upload File</button>
+</form>
+
+<form asp-page-handler="UploadFiles" method="post"
+      enctype="multipart/form-data">
+
+    <input type="file" name="files" multiple />
+    <button type="submit">Upload Files</button>
+</form>
+
+<form asp-page-handler="UploadFileViaModel" method="post"
+      enctype="multipart/form-data">
+
+    <input type="file" name="FileToUpload" />
+    <button type="submit">Upload File (model)</button>
+</form>

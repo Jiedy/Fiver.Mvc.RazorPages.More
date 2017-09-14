@@ -1,0 +1,18 @@
+﻿@page
+@model FileDownloadModel
+
+<p>List of Files</p>
+
+<ul>
+    @foreach (var item in Model.Files.Items)
+    {
+        <li>
+            <a asp-page-handler="Download"
+               asp-route-filename="@item.Name">
+                @item.Name
+            </a>
+        </li>
+    }
+</ul>
+
+<a asp-page="/FileUpload">Back to upload</a>
