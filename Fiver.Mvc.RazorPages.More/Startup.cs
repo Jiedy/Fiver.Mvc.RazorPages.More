@@ -2,6 +2,7 @@
 using Fiver.Mvc.RazorPages.More.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
@@ -23,13 +24,26 @@ namespace Fiver.Mvc.RazorPages.More
 
             services.AddScoped<GreetingServiceFilter>();
 
-            services.AddMvc();
+            services.AddAuthentication("FiverSecurityScheme")
+                    .AddCookie("FiverSecurityScheme", options =>
+                    {
+                        options.AccessDeniedPath = new PathString("/Security/Access");
+                        options.LoginPath = new PathString("/Security/Login");
+                    });
+
+            //services.AddMvc();
             //services.AddMvc()
             //        .AddRazorPagesOptions(options =>
             //        {
             //            options.RootDirectory = "/Pages";
             //            options.Conventions.AddPageRoute("/Routing", "NewRouting");
             //        });
+
+            services.AddMvc()
+                    .AddRazorPagesOptions(options =>
+                    {
+                        options.Conventions.AuthorizeFolder("/ProtectedPages");
+                    });
         }
 
         public void Configure(
@@ -37,6 +51,7 @@ namespace Fiver.Mvc.RazorPages.More
             IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
+            app.UseAuthentication();
             app.UseStaticFiles();
             app.UseMvcWithDefaultRoute();
         }
