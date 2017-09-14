@@ -31,6 +31,12 @@ namespace Fiver.Mvc.RazorPages.More
                         options.LoginPath = new PathString("/Security/Login");
                     });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("IsMember",
+                    policy => policy.RequireClaim("MembershipId"));
+            });
+
             //services.AddMvc();
             //services.AddMvc()
             //        .AddRazorPagesOptions(options =>
@@ -43,6 +49,7 @@ namespace Fiver.Mvc.RazorPages.More
                     .AddRazorPagesOptions(options =>
                     {
                         options.Conventions.AuthorizeFolder("/ProtectedPages");
+                        options.Conventions.AuthorizePage("/ProtectedPages/MemberOnly", "IsMember");
                     });
         }
 

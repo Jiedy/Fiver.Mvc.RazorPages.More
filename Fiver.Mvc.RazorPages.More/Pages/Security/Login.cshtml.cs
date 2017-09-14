@@ -27,7 +27,8 @@ namespace Fiver.Mvc.RazorPages.More.Pages.Security
             List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, "Sean Connery"),
-                new Claim(ClaimTypes.Email, Username)
+                new Claim(ClaimTypes.Email, Username),
+                new Claim("MembershipId", "007")
             };
 
             // create identity
