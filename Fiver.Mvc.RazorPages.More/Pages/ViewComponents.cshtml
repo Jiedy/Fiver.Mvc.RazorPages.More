@@ -1,0 +1,29 @@
+﻿@page
+@model ViewComponentsModel
+
+@* searched in /Pages/Components/UserInfo/info.cshtml
+    /Views/Shared/Components/UserInfo/info.cshtml *@
+@await Component.InvokeAsync("UserInfo")
+
+<hr />
+
+<input type="button" id="GetViewComponent" value="Get View Component" />
+<div id="result"></div>
+
+<script src="~/js/jquery.min.js"></script>
+<script>
+        $(function () {
+            $("#GetViewComponent").click(function () {
+
+                $.ajax({
+                    method: 'GET',
+                    url: '@Url.Action("UserInfo", "Components")'
+                }).done(function (data, statusText, xhdr) {
+                    $("#result").html(data);
+                }).fail(function (xhdr, statusText, errorText) {
+                    $("#result").html(JSON.stringify(xhdr));
+                });
+
+            });
+        });
+</script>
