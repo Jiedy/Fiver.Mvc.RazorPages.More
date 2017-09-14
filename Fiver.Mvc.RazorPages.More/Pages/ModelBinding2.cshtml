@@ -1,0 +1,35 @@
+﻿@page
+@model ModelBinding2Model
+
+<p><strong>Message: </strong> @Model.Message</p>
+<hr />
+
+<form method="get">
+    <input type="text" asp-for="Movie.Id" />
+    <input type="text" asp-for="Movie.Title" />
+    <button type="submit">OnGet</button>
+</form>
+<hr />
+
+<form method="get" asp-page-handler="Save">
+    <input type="hidden" name="handler" value="Save" />
+    <input type="text" asp-for="Movie.Id" />
+    <input type="text" asp-for="Movie.Title" />
+    <button type="submit">OnGetSave</button>
+</form>
+<hr />
+
+<form method="post">
+    <input type="text" asp-for="Movie.Id" />
+    <input type="text" asp-for="Movie.Title" />
+    <button type="submit">OnPost</button>
+</form>
+<hr />
+
+<form method="post" asp-page-handler="Save">
+    <input type="text" asp-for="Movie.Id" />
+    <input type="text" asp-for="Movie.Title" />
+    <button type="submit">OnPostSave</button>
+</form>
+<hr />
+

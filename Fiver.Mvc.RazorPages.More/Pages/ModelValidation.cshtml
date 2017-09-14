@@ -1,0 +1,26 @@
+﻿@page
+@model ModelValidationModel
+
+<p><strong>Message: </strong> @Model.Message</p>
+<hr />
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+
+    <input type="hidden" value="@Model.Employee.Id" /><br />
+
+    <label asp-for="Employee.EmployeeNo"></label>
+    <input asp-for="Employee.EmployeeNo" />
+    <span asp-validation-for="Employee.EmployeeNo"></span> <br />
+
+    <label asp-for="Employee.BlogUrl"></label>
+    <input asp-for="Employee.BlogUrl" />
+    <span asp-validation-for="Employee.BlogUrl"></span> <br />
+
+    <label asp-for="Employee.BirthDate"></label>
+    <input asp-for="Employee.BirthDate" />
+    <span asp-validation-for="Employee.BirthDate"></span> <br />
+
+    <button type="submit">Save</button>
+</form>
+

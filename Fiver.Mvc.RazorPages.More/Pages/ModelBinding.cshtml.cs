@@ -28,9 +28,7 @@ namespace Fiver.Mvc.RazorPages.More.Pages
             [FromHeader]string host,
             [FromHeader(Name = "User-Agent")]string userAgent)
             => this.Message = $"Pages/ModelBinding/OnGetFromHeader: {host} - {userAgent}";
-
-
-
+        
         public void OnGetComplexFromQuery([FromQuery]MovieInputModel model)
             => this.Message = $"Pages/ModelBinding/OnGetComplexFromQuery: {model.Id} - {model.Title}";
 
@@ -40,20 +38,5 @@ namespace Fiver.Mvc.RazorPages.More.Pages
         public void OnGetComplexFromHeader(
             HeaderInputModel model)
             => this.Message = $"Pages/ModelBinding/OnGetComplexFromHeader: {model.Host} - {model.UserAgent}";
-    }
-
-    public class MovieInputModel
-    {
-        public string Id { get; set; }
-        public string Title { get; set; }
-    }
-
-    public class HeaderInputModel
-    {
-        [FromHeader]
-        public string Host { get; set; }
-
-        [FromHeader(Name = "User-Agent")]
-        public string UserAgent { get; set; }
     }
 }
