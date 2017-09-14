@@ -1,4 +1,5 @@
-﻿using Fiver.Mvc.RazorPages.More.Models;
+﻿using Fiver.Mvc.RazorPages.More.Filters;
+using Fiver.Mvc.RazorPages.More.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,6 +18,10 @@ namespace Fiver.Mvc.RazorPages.More
                     Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "files")));
 
             services.AddScoped<ILookupService, LookupService>();
+
+            services.AddScoped<IGreetingService, GreetingService>();
+
+            services.AddScoped<GreetingServiceFilter>();
 
             services.AddMvc();
             //services.AddMvc()
